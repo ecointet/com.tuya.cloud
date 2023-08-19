@@ -1,19 +1,19 @@
 {
-  "id": "com.tuya.cloud",
+  "id": "com.tuya.cloud.casa78",
   "sdk": 3,
   "name": {
-    "en": "Tuya cloud"
+    "en": "Tuya cloud Casa78"
   },
   "brandColor": "#FF4900",
   "description": {
-    "en": "This app allows you to connect Homey to the Tuya cloud",
+    "en": "This app allows you to connect Homey to the Tuya cloud - special version for Casa78",
     "nl": "Deze app laat je connectie maken met de Tuya cloud"
   },
   "category": "lights",
   "version": "1.1.23",
   "compatibility": ">=5.0.0",
   "author": {
-    "name": "Jurgen Heine",
+    "name": "ecointet forked from Jurgen Heine",
     "email": "jurgen2.heine@gmail.com"
   },
   "contributors": {
@@ -22,7 +22,7 @@
         "name": "Jurgen Heine"
       },
       {
-        "name": "Diko"
+        "name": "Etienne Cointet"
       },
       {
         "name": "Peter Keuter"

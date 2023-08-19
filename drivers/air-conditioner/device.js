@@ -5,16 +5,16 @@ const DataUtil = require("../../util/datautil");
 
 const CAPABILITIES_SET_DEBOUNCE = 1000;
 const tuyaToHomeyModeMap =  new Map([
-    ['cold','cool'],
-    ['hot','heat'],
+    ['0','cool'],
+    ['1','heat'],
     ['wet','dry'],
     ['wind','fan'],
     ['auto','auto'],
     ['off','off']
 ]);
 const homeyToTuyaModeMap = new Map([
-    ['cool', 'cold'],
-    ['heat', 'hot'],
+    ['cool', '0'],
+    ['heat', '1'],
     ['dry', 'wet'],
     ['fan', 'wind'],
     ['auto', 'auto'],
@@ -35,7 +35,7 @@ class TuyaAirConditionerDevice extends TuyaBaseDevice {
         this.log("Air conditioner capabilities changed by Homey: " + JSON.stringify(valueObj));
         try {
             if (valueObj.target_temperature != null) {
-                this.set_target_temperature(valueObj.target_temperature*10);
+                this.set_target_temperature(Math.round(valueObj.target_temperature));
             }
             if (valueObj.onoff != null) {
                 this.set_on_off(valueObj.onoff === true || valueObj.onoff === 1);
@@ -53,7 +53,7 @@ class TuyaAirConditionerDevice extends TuyaBaseDevice {
                 this.log("Update air conditioner capabilities from Tuya: " + JSON.stringify(statusArr));
         statusArr.forEach(status => {
             switch (status.code) {
-                case 'switch':
+                case 'Power':
                     this.normalAsync('onoff', status.value);
                     if(status.value) {
                         this.normalAsync('thermostat_mode', this.lastKnowHomeyThermostatMode);
@@ -62,7 +62,7 @@ class TuyaAirConditionerDevice extends TuyaBaseDevice {
                     }
                     break;
                 case 'temp_set':
-                    this.normalAsync('target_temperature', status.value/10);
+                    this.normalAsync('target_temperature', status.value);
                     break;
                 case 'temp_current':
                     this.normalAsync('measure_temperature', status.value);
@@ -102,7 +102,7 @@ class TuyaAirConditionerDevice extends TuyaBaseDevice {
     }
 
     set_on_off(onoff) {
-        this.sendCommand("switch", onoff);
+        this.sendCommand("Power", onoff);
         if(!onoff) {
             this.normalAsync('thermostat_mode', 'off');
         }else{
@@ -114,12 +114,12 @@ class TuyaAirConditionerDevice extends TuyaBaseDevice {
     set_thermostat_mode(mode) {
         const tuyaMode = homeyToTuyaModeMap.get(mode);
         if(tuyaMode==='off') {
-            this.sendCommand("switch", false);
+            this.sendCommand("Power", false);
             this.normalAsync('onoff', false);
         }
         else{
             this.lastKnowHomeyThermostatMode = mode;
-            this.sendCommand("switch", true);
+            this.sendCommand("Power", true);
             this.sendCommand("mode", tuyaMode);
             this.normalAsync('onoff', true);
         }
