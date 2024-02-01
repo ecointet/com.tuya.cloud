@@ -1,0 +1,59 @@
+{
+  "id": "com.tuya.cloud.casa78",
+  "sdk": 3,
+  "name": {
+    "en": "Tuya cloud Casa78"
+  },
+  "brandColor": "#FF4900",
+  "description": {
+    "en": "This app allows you to connect Homey to the Tuya cloud - special version for Casa78",
+    "nl": "Deze app laat je connectie maken met de Tuya cloud"
+  },
+  "category": "lights",
+  "version": "1.1.23",
+  "compatibility": ">=5.0.0",
+  "author": {
+    "name": "ecointet forked from Jurgen Heine",
+    "email": "jurgen2.heine@gmail.com"
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Jurgen Heine"
+      },
+      {
+        "name": "Etienne Cointet"
+      },
+      {
+        "name": "Peter Keuter"
+      },
+      {
+        "name": "Adrian Rockall"
+      },
+      {
+        "name": "Ronny Winkler"
+      }
+    ]
+  },
+  "bugs": {
+    "url": "https://github.com/jurgenheine/com.tuya.cloud/issues"
+  },
+  "source": "https://github.com/jurgenheine/com.tuya.cloud",
+  "homepage": "https://github.com/jurgenheine/com.tuya.cloud/blob/master/README.md",
+  "homeyCommunityTopicId": 21313,
+  "permissions": [],
+  "images": {
+    "large": "/assets/images/large.jpg",
+    "small": "/assets/images/small.jpg"
+  },
+  "api": {
+    "connect": {
+      "method": "GET",
+      "path": "/"
+    },
+    "refreshScenes": {
+      "method": "GET",
+      "path": "/refreshScenes/"
+    }
+  }
+}
